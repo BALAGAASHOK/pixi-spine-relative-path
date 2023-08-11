@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+
+<head>
+  <script src="scripts/pixijs7.3.js"></script>
+  <script src="scripts/pixi-spine4.0.4.js"></script>
+</head>
+
+<body>
+
+  <h1>Hello PixiJS</h1>
+
+</body>
+<script>
+  const app = new PIXI.Application({ background: '#1099bb' });
+  document.body.appendChild(app.view);
+  // Add the assets to load
+  PIXI.Assets.add('spriteOne', '../assets/games/dist/spriteOne.jpg');
+  PIXI.Assets.add('spriteTwo', '../assets/games/dist/spriteTwo.jpg');
+  PIXI.Assets.add('spineboyPro', '../assets/games/dist/spineboy-pro.json');
+
+  // Load the assets and get a resolved promise once both are loaded
+  const texturesPromise = PIXI.Assets.load(['spriteOne', 'spriteTwo', 'spineboyPro']);
+  // When the promise resolves, we have the texture!
+  texturesPromise.then((textures) => {
+    console.log(textures);
+    const spriteOne = PIXI.Sprite.from(textures.spriteOne);
+    app.stage.addChild(spriteOne);
+  });
+
+</script>
+
+</html>
